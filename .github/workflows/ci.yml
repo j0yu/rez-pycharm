@@ -1,0 +1,25 @@
+name: CI
+on: push
+
+
+jobs:
+  install:
+    name: Install as rez package (py${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [2.7, 3.7]
+
+    steps:
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python }}
+
+    - uses: j0yu/setup-rez@v1
+
+    - name: Checkout ${{ github.repository }}
+      uses: actions/checkout@v2
+
+    - run: rez build --install
+    - run: rez env pycharm_ce -- which pycharm
