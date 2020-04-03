@@ -22,4 +22,9 @@ jobs:
       uses: actions/checkout@v2
 
     - run: rez build --install
-    - run: rez env pycharm_ce -- which pycharm
+    
+    - name: pycharm executable exists
+      run: rez env pycharm_ce -- which pycharm
+
+    - name: pydevd_pycharm.settrace in Python
+      run: rez env pycharm_ce -- python -c 'import pydevd_pycharm; assert pydevd_pycharm.settrace'

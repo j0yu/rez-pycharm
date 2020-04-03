@@ -3,7 +3,7 @@ name = 'pycharm_ce'
 
 # Vendor packages: <vendor_version>+local.<our_version>
 __version__ = '2019.3.4'
-version = __version__ + '+local.1.0.0'
+version = __version__ + '+local.1.1.0'
 
 description = 'The Python IDE for Professional Developers'
 
@@ -52,6 +52,9 @@ fi
 
 
 def commands():
-    """Commands to set up environment for ``rez env vscode``"""
+    """Commands to set up environment for ``rez env pycharm_ce``"""
     import os
     env.PATH.append(os.path.join('{root}', 'local', 'bin'))
+    env.PYTHONPATH.append(
+        os.path.join('{root}', 'plugins', 'python-ce', 'helpers', 'pydev')
+    )
