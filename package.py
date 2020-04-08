@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-name = 'pycharm_ce'
+name = "pycharm_ce"
 
 # Vendor packages: <vendor_version>+local.<our_version>
-__version__ = '2019.3.4'
-version = __version__ + '+local.1.1.0'
+__version__ = "2020.1"
+version = __version__ + "+local.1.0.0"
 
-description = 'The Python IDE for Professional Developers'
+description = "The Python IDE for Professional Developers"
 
-authors = ['JetBrains', 'Joseph Yu']
+authors = ["JetBrains", "Joseph Yu"]
 
-variants = [['platform-linux', 'arch-x86_64']]
+variants = [["platform-linux", "arch-x86_64"]]
 
-tools = ['pycharm']
+tools = ["pycharm"]
 # @late()
 # def tools():
 #     import os
@@ -24,7 +24,7 @@ tools = ['pycharm']
 #     return executables
 
 
-build_command = r'''
+build_command = r"""
 set -euf -o pipefail
 
 # Setup: curl "{CURL_FLAGS}" ...
@@ -48,13 +48,16 @@ then
         "$REZ_BUILD_INSTALL_PATH"/local/bin/pycharm
 fi
 
-'''.format(version=__version__, CURL_FLAGS='${{CURL_FLAGS[@]}}')
+""".format(
+    version=__version__, CURL_FLAGS="${{CURL_FLAGS[@]}}"
+)
 
 
 def commands():
     """Commands to set up environment for ``rez env pycharm_ce``"""
     import os
-    env.PATH.append(os.path.join('{root}', 'local', 'bin'))
+
+    env.PATH.append(os.path.join("{root}", "local", "bin"))
     env.PYTHONPATH.append(
-        os.path.join('{root}', 'plugins', 'python-ce', 'helpers', 'pydev')
+        os.path.join("{root}", "plugins", "python-ce", "helpers", "pydev")
     )
